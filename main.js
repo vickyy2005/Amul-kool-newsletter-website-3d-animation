@@ -47,16 +47,20 @@ const preloadImages = () => {
   }
 };
 
+let targetFrameIndex = 1;
+
 const setupCanvas = () => {
   if(!canvas || !context) return;
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   
-  if (images[1] && images[1].complete) {
-    drawCover(images[1]);
-  } else if (images[1]) {
-    images[1].onload = () => {
-      drawCover(images[1]);
+  const imgToDraw = images[targetFrameIndex] || images[1];
+  
+  if (imgToDraw && imgToDraw.complete) {
+    drawCover(imgToDraw);
+  } else if (imgToDraw) {
+    imgToDraw.onload = () => {
+      drawCover(imgToDraw);
     };
   }
 }
@@ -83,7 +87,6 @@ function drawCover(img) {
   context.drawImage(img, x, y, renderWidth, renderHeight);
 }
 
-let targetFrameIndex = 1;
 
 const updateImage = index => {
   targetFrameIndex = index;
