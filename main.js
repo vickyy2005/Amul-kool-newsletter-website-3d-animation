@@ -10,9 +10,38 @@ const currentFrame = index => (
 
 const images = [];
 
+let loadedCount = 0;
+const loader = document.getElementById('loader');
+const loaderBar = document.getElementById('loader-bar');
+const loaderText = document.getElementById('loader-text');
+let loaderRemoved = false;
+
 const preloadImages = () => {
   for (let i = 1; i <= frameCount; i++) {
     const img = new Image();
+    
+    const handleLoad = () => {
+      loadedCount++;
+      const percentage = Math.min(100, Math.round((loadedCount / frameCount) * 100));
+      if (loaderBar) loaderBar.style.width = `${percentage}%`;
+      if (loaderText) loaderText.textContent = `${percentage}%`;
+      
+      if (loadedCount >= frameCount * 0.95 && !loaderRemoved) {
+        loaderRemoved = true;
+        if (loader) {
+          loader.style.opacity = '0';
+          setTimeout(() => { 
+            loader.style.display = 'none'; 
+            document.body.classList.remove('overflow-hidden');
+          }, 700);
+        } else {
+          document.body.classList.remove('overflow-hidden');
+        }
+      }
+    };
+    
+    img.onload = handleLoad;
+    img.onerror = handleLoad;
     img.src = currentFrame(i);
     images[i] = img;
   }
