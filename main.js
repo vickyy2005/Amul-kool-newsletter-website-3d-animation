@@ -5,7 +5,7 @@ const context = canvas.getContext('2d');
 
 const frameCount = 240; 
 const currentFrame = index => (
-  `/frames/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`
+  `./frames/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`
 );
 
 const images = [];
@@ -33,7 +33,7 @@ const setupCanvas = () => {
 }
 
 function drawCover(img) {
-  if(!canvas || !context) return;
+  if(!canvas || !context || !img.complete || img.naturalWidth === 0) return;
   const canvasRatio = canvas.width / canvas.height;
   const imgRatio = img.width / img.height;
   let renderWidth, renderHeight, x, y;
@@ -54,9 +54,20 @@ function drawCover(img) {
   context.drawImage(img, x, y, renderWidth, renderHeight);
 }
 
+let targetFrameIndex = 1;
+
 const updateImage = index => {
+  targetFrameIndex = index;
   if (images[index]) {
-    drawCover(images[index]);
+    if (images[index].complete) {
+      drawCover(images[index]);
+    } else {
+      images[index].onload = () => {
+        if (targetFrameIndex === index) {
+          drawCover(images[index]);
+        }
+      };
+    }
   }
 }
 
