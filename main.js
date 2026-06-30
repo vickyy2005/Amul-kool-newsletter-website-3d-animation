@@ -38,6 +38,10 @@ const preloadImages = () => {
           document.body.classList.remove('overflow-hidden');
         }
       }
+      
+      if (targetFrameIndex === i) {
+        drawCover(img);
+      }
     };
     
     img.onload = handleLoad;
@@ -58,10 +62,6 @@ const setupCanvas = () => {
   
   if (imgToDraw && imgToDraw.complete) {
     drawCover(imgToDraw);
-  } else if (imgToDraw) {
-    imgToDraw.onload = () => {
-      drawCover(imgToDraw);
-    };
   }
 }
 
@@ -93,12 +93,6 @@ const updateImage = index => {
   if (images[index]) {
     if (images[index].complete) {
       drawCover(images[index]);
-    } else {
-      images[index].onload = () => {
-        if (targetFrameIndex === index) {
-          drawCover(images[index]);
-        }
-      };
     }
   }
 }
