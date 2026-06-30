@@ -104,7 +104,7 @@ window.addEventListener('scroll', () => {
   if (!spacer) return;
   
   const maxScrollTop = spacer.offsetHeight - window.innerHeight;
-  let scrollTop = document.documentElement.scrollTop;
+  let scrollTop = window.scrollY || document.documentElement.scrollTop;
   
   if (scrollTop > maxScrollTop) {
     scrollTop = maxScrollTop;
