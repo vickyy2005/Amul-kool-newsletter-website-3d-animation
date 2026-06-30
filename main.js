@@ -118,12 +118,53 @@ if (darkModeToggle) {
     }
   });
 }
+// ==========================================
+// STATIC DATA FOR VERCEL DEPLOYMENT
+// ==========================================
+const staticData = {
+  flavors: [
+    {
+      id: "rose", name: "Rose", tagline: "Floral & Soothing",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAKdppg5uiWWNTnFhbipkrajKJl3fTiEzdIFPNbTWOzaqjDJKJXhSdp_JbSOO9Sm8LnphCYGgnxek38BG_PR9o19Lmb6R1tLPM-IQkTWXJdCJbWsbA8knnh12_lYGI9v7nrikFRpS0TDwFZh0ZXRCKF4Mk5derQeHJCGRWT7I97UjjvfQ5J0_27gxIXWbhnU8_W3MV2X3cNoRyljOAUrmpdV1i_NZv9tFTve3XPGNqgD1N4q8jatz6Rhu77JpZIxqnayuDebF0ROg",
+      theme: { bg: "bg-rose-50 dark:bg-rose-800", text: "text-rose-dark dark:text-rose-50", border: "border-primary" },
+      nutrition: { energy: "85 kcal", protein: "3.0 g", carbs: "10.5 g", fat: "3.5 g" }
+    },
+    {
+      id: "kesar", name: "Kesar", tagline: "Rich & Traditional",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAErOcepOZuLtbWuYnPwziyLvcLAL4XdnsI5vxZYAKiZsFA8cD5KWCJb-z99iaUDUx_NJx8xI17VE9ofVIrc148dKyBJ-mV9-xAU2VIwZX16h6VXpBrVugTFn8B8qyuM0hCnJcxFOHT1Eeq0Au8r2w7fdCJR_nFz4Ps6UCBBS8uQeleisLN5pgOsJuOhPl3QAJjM77p1lAxo4uHSJbNtmdYaVZA8nov3t0sXjlvjpjDL1m-jz2BVpgUTxcNhUx5C5ZO_trpvL6tDg",
+      theme: { bg: "bg-yellow-50 dark:bg-yellow-900/40", text: "text-yellow-600 dark:text-yellow-50", border: "border-yellow-400 dark:border-yellow-600" },
+      nutrition: { energy: "88 kcal", protein: "3.2 g", carbs: "11.0 g", fat: "3.5 g" }
+    },
+    {
+      id: "badam", name: "Badam", tagline: "Nutty & Wholesome",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBpDRPyUiVaj-HxNSsPhHBMPGnq8RhHdmQ3IT8XLW8RMoF4RqeBTR9gjXvWV7WKL2eF4gi5qM9A8zLXIz0CBj1EX33078kFNWl2KOXixGPaqhAAMyx4lKASEU9ULl2rA01CxRApoTOm7992gfKfu8pU1lXx6_Hj4XabFrEbVHmJV5UMX__d1FFq73nYBaIr6vG2oxuYFC9gBmvQMlfAHu-a4br4Jh4lGffTPYT2A3bHk1ctPZkzfVr3u0Nq1W2Bsvq7fzQiOTFz8g",
+      theme: { bg: "bg-orange-50 dark:bg-orange-900/40", text: "text-orange-600 dark:text-orange-50", border: "border-orange-400 dark:border-orange-600" },
+      nutrition: { energy: "90 kcal", protein: "3.5 g", carbs: "10.2 g", fat: "3.8 g" }
+    },
+    {
+      id: "chocolate", name: "Chocolate", tagline: "Decadent & Classic",
+      image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBO4iSEzGAPlHoLoqXnzJX-2Jx75mt8d8dN7sR8eAfA8eVcNoOkqR_OCEVSDIkVGZ1NhyP7nUxPz1xBiJ-WDJyxm0vvs0E8dJiAA9CzZNFmlVy5jx1Xktg9GiaNHPywKi0O92DoE95LNZQaNU9CJ62LZ73UqKePzybjBjVd2F23hzzKwQx2k7V_NdrCQ82PfN064qnxzpLAK3ceJCuScnssNXc_USpK9uWm0FkmxfYHWUPfapWKmCh1ovaSUWvTQ1Af4rgpUp12CQ",
+      theme: { bg: "bg-stone-50 dark:bg-stone-900/40", text: "text-stone-700 dark:text-stone-50", border: "border-stone-500 dark:border-stone-600" },
+      nutrition: { energy: "95 kcal", protein: "3.0 g", carbs: "12.0 g", fat: "3.5 g" }
+    }
+  ],
+  testimonials: [
+    { text: "The most refreshing summer drink! I always have a couple in my fridge. Rose is absolutely the best.", author: "Priya S.", rating: 5, avatar: "https://randomuser.me/api/portraits/women/44.jpg" },
+    { text: "My kids love the Chocolate flavor, and I feel good knowing it's made with pure Amul milk.", author: "Rahul M.", rating: 4.5, avatar: "https://randomuser.me/api/portraits/men/32.jpg" },
+    { text: "Nothing beats Amul Kool Badam on a road trip. It's energizing and so tasty.", author: "Sneha K.", rating: 5, avatar: "https://randomuser.me/api/portraits/women/68.jpg" },
+    { text: "The Kesar flavor is rich and authentic. Tastes just like the traditional milk my grandmother used to make.", author: "Amit P.", rating: 5, avatar: "https://randomuser.me/api/portraits/men/46.jpg" }
+  ],
+  faqs: [
+    { question: "Does Amul Kool need to be refrigerated?", answer: "Amul Kool can be stored at room temperature before opening thanks to our sterilization process. However, it tastes best when served chilled. Once opened, keep it refrigerated and consume within 2 days." },
+    { question: "Is Amul Kool suitable for vegetarians?", answer: "Yes! All variants of Amul Kool are 100% vegetarian. They are made from pure cow and buffalo milk and natural flavorings." },
+    { question: "Are there any artificial preservatives?", answer: "No, Amul Kool does not contain any artificial preservatives. We use advanced thermal processing to ensure a long shelf life while maintaining freshness and nutrition." }
+  ]
+};
 
-// 2. Fetch Dynamic Data from Backend
-async function fetchContent() {
+// 2. Load Content Synchronously
+function fetchContent() {
   try {
-    const response = await fetch('http://localhost:3000/api/content');
-    const data = await response.json();
+    const data = staticData;
     
     renderFlavors(data.flavors);
     renderTestimonials(data.testimonials);
@@ -134,7 +175,7 @@ async function fetchContent() {
     attachCardListeners();
     if (typeof reveal === 'function') reveal();
   } catch (error) {
-    console.error('Error fetching content:', error);
+    console.error('Error loading content:', error);
   }
 }
 
@@ -360,8 +401,13 @@ function initMap() {
       const pin = document.getElementById('pin-input').value.trim();
       
       try {
-        const response = await fetch(`http://localhost:3000/api/stores?pin=${pin}`);
-        const data = await response.json();
+        // Mocked response for store locator on Vercel
+        const data = {
+          stores: [
+            { name: "Amul Parlour - Downtown", address: `123 Main St, Near ${pin}`, distance: "1.2 km", lat: 28.6139 + (Math.random() * 0.05), lng: 77.2090 + (Math.random() * 0.05) },
+            { name: "Amul Preferred Outlet", address: `45 Market Road, Area ${pin}`, distance: "3.5 km", lat: 28.6139 + (Math.random() * 0.05), lng: 77.2090 - (Math.random() * 0.05) }
+          ]
+        };
         
         // Clear old markers
         markers.forEach(m => map.removeLayer(m));
@@ -413,25 +459,18 @@ if (contactForm) {
     const message = document.getElementById('message').value;
     
     try {
-      const response = await fetch('http://localhost:3000/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, email, subject, message })
-      });
-      
-      const result = await response.json();
-      
-      contactMessage.textContent = result.message || result.error;
-      contactMessage.classList.remove('hidden', 'text-red-500', 'text-green-500');
-      
-      if (!response.ok) {
-        contactMessage.classList.add('text-red-500');
-      } else {
+      // Mocked successful submission for Vercel
+      setTimeout(() => {
+        contactMessage.textContent = "Thank you! Your message has been sent successfully.";
+        contactMessage.classList.remove('hidden', 'text-red-500');
         contactMessage.classList.add('text-green-500', 'dark:text-green-400');
         contactForm.reset();
-      }
+        
+        setTimeout(() => {
+          contactMessage.classList.add('hidden');
+        }, 5000);
+      }, 800);
+      
     } catch (error) {
       console.error("Error submitting contact form:", error);
       contactMessage.textContent = "Failed to send message. Please try again later.";
@@ -465,6 +504,34 @@ const langToggle = document.getElementById('lang-toggle');
 let currentLang = localStorage.getItem('lang') || 'en';
 let hiTranslations = null;
 
+const staticTranslations = {
+  hi: {
+    "nav-features": "विशेषताएं",
+    "nav-story": "हमारी कहानी",
+    "nav-flavors": "फ्लेवर्स",
+    "nav-contact": "संपर्क करें",
+    "hero-title": "अमूल कूल",
+    "hero-subtitle": "द टेस्ट ऑफ इंडिया",
+    "features-subtitle": "कूल डिफरेंस",
+    "features-title": "आपके आनंद के लिए तैयार",
+    "features-desc": "अमूल कूल रोज़ का हर घूंट प्रामाणिक स्वाद और पौष्टिक अच्छाई देता है।",
+    "story-title": "शुद्धता की विरासत",
+    "flavors-title": "कूल परिवार",
+    "flavors-desc": "अपना पसंदीदा स्वाद खोजें।",
+    "testimonials-title": "लाखों लोगों की पसंद",
+    "map-title": "अपने पास खोजें",
+    "map-desc": "निकटतम अमूल पार्लर खोजने के लिए अपना पिन कोड दर्ज करें।",
+    "map-placeholder": "पिन कोड दर्ज करें",
+    "map-btn": "खोजें",
+    "contact-title": "संपर्क करें",
+    "newsletter-title": "अमूल के साथ कूल रहें",
+    "newsletter-desc": "अपडेट के लिए हमारे न्यूज़लेटर की सदस्यता लें।",
+    "newsletter-placeholder": "अपना ईमेल दर्ज करें",
+    "newsletter-btn": "सब्सक्राइब",
+    "shop-now": "अभी खरीदें"
+  }
+};
+
 async function applyTranslations(lang) {
   if (lang === 'en') {
     if (localStorage.getItem('lang') !== 'en') {
@@ -476,8 +543,7 @@ async function applyTranslations(lang) {
   
   if (!hiTranslations) {
     try {
-      const response = await fetch('http://localhost:3000/api/translations?lang=hi');
-      hiTranslations = await response.json();
+      hiTranslations = staticTranslations.hi;
     } catch (error) {
       console.error("Failed to load translations", error);
       return;
