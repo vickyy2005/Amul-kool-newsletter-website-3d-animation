@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amul Kool Rose - Refreshingly Real</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#F43F5E", /* Rose 500 */
+                        "background-light": "#FFFFFF", 
+                        "rose-light": "#FFE4E6", /* Rose 100 */
+                        "rose-dark": "#9F1239", /* Rose 800 */
+                        "rose-50": "#FFF1F2",
+                        "rose-100": "#FFE4E6",
+                        "rose-600": "#E11D48",
+                        "rose-800": "#9F1239",
+                        "rose-900": "#881337",
+                        "rose-950": "#4C0519",
+                    },
+                    fontFamily: {
+                        display: ["Playfair Display", "serif"],
+                        sans: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.75rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overscroll-behavior-y: none;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+  </head>
+  <body class="bg-background-light dark:bg-rose-950 text-rose-950 dark:text-rose-50 transition-colors duration-300">
+    
+    <header class="fixed w-full z-50 top-6 transition-all duration-300">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16 bg-white/40 dark:bg-rose-950/40 backdrop-blur-lg rounded-full border border-white/60 dark:border-rose-800/60 shadow-[0_8px_32px_0_rgba(244,63,94,0.15)] px-6 transition-colors duration-300">
+          <div class="flex-shrink-0 flex items-center">
+            <span class="font-display font-extrabold text-2xl tracking-tight text-primary drop-shadow-sm">Amul Kool</span>
+          </div>
+          <nav class="hidden md:flex space-x-2">
+            <a class="text-rose-950 dark:text-rose-100 hover:text-primary dark:hover:text-primary hover:bg-white/70 dark:hover:bg-rose-800/70 px-4 py-2 rounded-full font-medium transition-all duration-300" href="#features" data-i18n="nav-features">Features</a>
+            <a class="text-rose-950 dark:text-rose-100 hover:text-primary dark:hover:text-primary hover:bg-white/70 dark:hover:bg-rose-800/70 px-4 py-2 rounded-full font-medium transition-all duration-300" href="#story" data-i18n="nav-story">Our Story</a>
+            <a class="text-rose-950 dark:text-rose-100 hover:text-primary dark:hover:text-primary hover:bg-white/70 dark:hover:bg-rose-800/70 px-4 py-2 rounded-full font-medium transition-all duration-300" href="#flavors" data-i18n="nav-flavors">Flavors</a>
+            <a class="text-rose-950 dark:text-rose-100 hover:text-primary dark:hover:text-primary hover:bg-white/70 dark:hover:bg-rose-800/70 px-4 py-2 rounded-full font-medium transition-all duration-300" href="#contact" data-i18n="nav-contact">Contact</a>
+          </nav>
+          <div class="flex items-center space-x-4">
+            <button id="lang-toggle" class="text-xs font-bold text-primary border border-primary px-3 py-1.5 rounded-full hover:bg-primary hover:text-white transition-colors">
+              HI
+            </button>
+            <button id="dark-mode-toggle" class="text-rose-950 dark:text-rose-50 p-2 rounded-full hover:bg-rose-100 dark:hover:bg-rose-800 transition-colors focus:outline-none flex items-center justify-center">
+              <span class="material-icons dark:hidden">dark_mode</span>
+              <span class="material-icons hidden dark:block">light_mode</span>
+            </button>
+            <a class="hidden md:inline-flex items-center justify-center px-6 py-2 border border-transparent text-sm font-semibold rounded-full text-white bg-gradient-to-r from-primary to-rose-400 hover:from-rose-600 hover:to-primary transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5" href="#">
+                Shop Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div id="animation-spacer" style="height: 500vh;">
+      <div class="scroll-container bg-black relative">
+        <canvas id="animation-canvas"></canvas>
+        <div id="hero-text" class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none transition-opacity duration-700 z-10 reveal">
+          <h1 class="text-7xl md:text-9xl font-display font-bold text-primary mb-3 tracking-tight" data-i18n="hero-title">Amul Kool</h1>
+          <p class="text-base md:text-lg font-sans text-white font-semibold uppercase tracking-[0.25em] ml-2 drop-shadow-md" data-i18n="hero-subtitle">The Taste of India</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative z-10 bg-background-light dark:bg-rose-950 transition-colors duration-300">
+      <section class="py-24 bg-white dark:bg-rose-900 transition-colors duration-300" id="features">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+            <h2 class="text-base text-primary font-semibold tracking-wide uppercase" data-i18n="features-subtitle">The Kool Difference</h2>
+            <p class="mt-2 text-3xl leading-8 font-display font-extrabold tracking-tight text-rose-dark dark:text-rose-50 sm:text-4xl" data-i18n="features-title">Crafted for Your Delight</p>
+            <p class="mt-4 max-w-2xl text-xl text-rose-800 dark:text-rose-200 mx-auto" data-i18n="features-desc">Every sip of Amul Kool Rose delivers a burst of authentic flavor and nourishing goodness.</p>
+          </div>
+          <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="group text-center">
+              <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-rose-100 dark:bg-rose-800 text-primary mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                <span class="material-icons text-4xl">local_florist</span>
+              </div>
+              <h3 class="mt-4 text-xl font-bold text-rose-dark dark:text-rose-50 font-display">Natural Rose Flavor</h3>
+              <p class="mt-2 text-base text-rose-800 dark:text-rose-300">Infused with the authentic extract of fresh roses, offering a fragrant and calming sensory experience.</p>
+            </div>
+            <div class="group text-center">
+              <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-rose-100 dark:bg-rose-800 text-primary mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                <span class="material-icons text-4xl">water_drop</span>
+              </div>
+              <h3 class="mt-4 text-xl font-bold text-rose-dark dark:text-rose-50 font-display">Rich Creamy Milk</h3>
+              <p class="mt-2 text-base text-rose-800 dark:text-rose-300">Made with premium quality, wholesome Amul milk that provides essential nutrients and a luscious texture.</p>
+            </div>
+            <div class="group text-center">
+              <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-rose-100 dark:bg-rose-800 text-primary mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                <span class="material-icons text-4xl">directions_run</span>
+              </div>
+              <h3 class="mt-4 text-xl font-bold text-rose-dark dark:text-rose-50 font-display">On-the-Go Refreshment</h3>
+              <p class="mt-2 text-base text-rose-800 dark:text-rose-300">Conveniently packaged to be your perfect travel companion. Just chill, shake, and enjoy anywhere.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-24 bg-rose-50 dark:bg-rose-950 transition-colors duration-300 overflow-hidden" id="story">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+            <div class="relative mb-12 lg:mb-0">
+              <div class="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden shadow-2xl">
+                <img alt="Fresh roses and milk ingredients" class="object-cover w-full h-full transform hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8VcxjrENmS6UqwDAIN5MYBdtRfl01BqPfQx4Jt629rQ1soZMP_YJbYlBTtocZ3Zw-_0Vn2zlxB-ljPo61SGiN2mxtgjYfrPKnejtZnzB6usmvu_amESS8GwF0NmxJI3jOY7wODBvHEF83GlIJ6CTxj_pNnGHxWA3Ne2dZIK6k2D87K9lrYw2ThgUfGyDQ03Q7Esl1q7cVN2_2wvHXGjbDHZb0BCXaAVLyvbkoEOoakYoS0vzNBJ8ZJXRQJLmn0hF7IzXRhsIWHw"/>
+              </div>
+              <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+              <div class="absolute -top-8 -left-8 w-48 h-48 bg-rose-dark rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style="animation-delay: 2s;"></div>
+            </div>
+            <div class="reveal">
+              <h2 class="text-4xl font-display font-bold text-rose-dark dark:text-rose-50 mb-6" data-i18n="story-title">A Legacy of Purity</h2>
+              <p class="text-lg text-rose-900 dark:text-rose-200 mb-6 leading-relaxed">For decades, Amul has been synonymous with the purest milk in India. Our journey with Amul Kool started with a simple vision: to create a refreshing beverage that stays true to our roots while offering a modern twist.</p>
+              <p class="text-lg text-rose-900 dark:text-rose-200 mb-8 leading-relaxed">The creation of our Rose flavor is an art. We carefully select the finest rose essences and blend them seamlessly with our signature creamy milk. The result is a drink that not only quenches your thirst but transports you to a serene, royal garden with every sip.</p>
+              <a class="inline-flex items-center text-primary font-semibold text-lg hover:text-rose-dark dark:hover:text-rose-light transition-colors group" href="https://amul.com/m/about-us" target="_blank" rel="noopener noreferrer">
+                  Read full story <span class="material-icons ml-2 transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-24 bg-white dark:bg-rose-900 transition-colors duration-300" id="flavors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16 reveal">
+            <h2 class="text-4xl font-display font-bold text-rose-dark dark:text-rose-50 mb-4" data-i18n="flavors-title">Explore the Kool Family</h2>
+            <p class="text-xl text-rose-800 dark:text-rose-200" data-i18n="flavors-desc">Find your perfect flavor profile. Click to see nutritional facts.</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="flavors-container">
+            <!-- Dynamic Flavors Loaded Here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- NEW: Testimonials Marquee Section -->
+      <section class="py-24 bg-rose-50/50 dark:bg-rose-950/50 overflow-hidden relative border-y border-rose-100 dark:border-rose-900 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
+          <h2 class="text-4xl font-display font-bold text-rose-dark dark:text-rose-50" data-i18n="testimonials-title">Loved by Millions</h2>
+          <p class="text-rose-800 dark:text-rose-200 mt-3 text-lg">See what our community is saying about Amul Kool.</p>
+        </div>
+        
+        <div class="marquee-container flex">
+          <div class="marquee-content flex space-x-6 px-4 animate-marquee" id="testimonials-container">
+            <!-- Dynamic Testimonials Loaded Here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- NEW: Where to Buy / Store Locator -->
+      <section class="py-24 bg-white dark:bg-rose-900 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal">
+            <div>
+              <h2 class="text-4xl font-display font-bold text-rose-dark dark:text-rose-50 mb-6" data-i18n="map-title">Find Amul Kool Near You</h2>
+              <p class="text-lg text-rose-800 dark:text-rose-200 mb-8" data-i18n="map-desc">Available at millions of retailers across India. Enter your pin code or city to find the nearest Amul Parlour.</p>
+              <form id="store-locator-form" class="flex max-w-md shadow-md rounded-full overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 dark:focus-within:ring-offset-rose-900">
+                <input id="pin-input" type="text" placeholder="Enter PIN Code" data-i18n="map-placeholder" class="flex-grow px-5 py-4 border-none focus:ring-0 bg-rose-50 dark:bg-rose-950 dark:text-white outline-none" required />
+                <button type="submit" class="px-8 py-4 bg-primary text-white font-semibold hover:bg-rose-600 transition-colors flex items-center">
+                  <span class="material-icons mr-2">search</span> <span data-i18n="map-btn">Find</span>
+                </button>
+              </form>
+            </div>
+            <div class="bg-rose-100 dark:bg-rose-800 rounded-3xl h-96 flex items-center justify-center relative overflow-hidden shadow-xl border-4 border-white dark:border-rose-700/50">
+              <!-- Leaflet Map Container -->
+              <div id="map" class="absolute inset-0 z-0"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEW: FAQ Section -->
+      <section class="py-24 bg-rose-50 dark:bg-rose-950 transition-colors duration-300">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl font-display font-bold text-rose-dark dark:text-rose-50 mb-4">Frequently Asked Questions</h2>
+            <p class="text-rose-800 dark:text-rose-200">Got questions? We've got answers.</p>
+          </div>
+          <div class="space-y-4" id="faq-container">
+            <!-- Dynamic FAQs Loaded Here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- NEW: Contact Us Section -->
+      <section id="contact" class="py-24 bg-rose-50 dark:bg-rose-900 transition-colors duration-300 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-64 h-64 bg-primary rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-10 animate-pulse"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-rose-300 dark:bg-rose-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30 dark:opacity-20 animate-pulse" style="animation-delay: 2s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 reveal">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-display font-extrabold text-rose-dark dark:text-rose-50 mb-4 tracking-tight" data-i18n="contact-title">Get in Touch</h2>
+            <p class="text-xl text-rose-800 dark:text-rose-200 max-w-2xl mx-auto">We'd love to hear from you. Whether you have a question about our flavors, pricing, or anything else, our team is ready to answer all your questions.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white/60 dark:bg-rose-950/60 backdrop-blur-xl rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/50 dark:border-rose-700/30">
+            
+            <div class="flex flex-col justify-center">
+              <h3 class="text-3xl font-display font-bold text-rose-dark dark:text-rose-50 mb-8">Contact Information</h3>
+              <div class="space-y-6">
+                <div class="flex items-start">
+                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-rose-100 dark:bg-rose-800 text-primary">
+                    <span class="material-icons">location_on</span>
+                  </div>
+                  <div class="ml-4">
+                    <h4 class="text-lg font-semibold text-rose-dark dark:text-rose-100">Our Headquarters</h4>
+                    <p class="mt-1 text-rose-800 dark:text-rose-300">Amul Dairy Road, Anand,<br>Gujarat 388001, India</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-rose-100 dark:bg-rose-800 text-primary">
+                    <span class="material-icons">phone</span>
+                  </div>
+                  <div class="ml-4">
+                    <h4 class="text-lg font-semibold text-rose-dark dark:text-rose-100">Call Us</h4>
+                    <p class="mt-1 text-rose-800 dark:text-rose-300">+91 1800 258 3333<br>Mon-Fri, 9am to 6pm IST</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-rose-100 dark:bg-rose-800 text-primary">
+                    <span class="material-icons">email</span>
+                  </div>
+                  <div class="ml-4">
+                    <h4 class="text-lg font-semibold text-rose-dark dark:text-rose-100">Email Us</h4>
+                    <p class="mt-1 text-rose-800 dark:text-rose-300">customercare@amul.coop<br>We aim to reply within 24 hours.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-white dark:bg-rose-900 rounded-2xl p-8 shadow-lg border border-rose-50 dark:border-rose-800">
+              <form id="contact-form" class="space-y-6">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-rose-900 dark:text-rose-100">Full Name</label>
+                  <input type="text" id="name" required class="mt-1 block w-full rounded-xl border-gray-300 dark:border-rose-700 bg-rose-50/50 dark:bg-rose-950/50 px-4 py-3 text-rose-900 dark:text-white focus:border-primary focus:ring-primary dark:focus:ring-offset-rose-900 transition-colors">
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium text-rose-900 dark:text-rose-100">Email Address</label>
+                  <input type="email" id="email" required class="mt-1 block w-full rounded-xl border-gray-300 dark:border-rose-700 bg-rose-50/50 dark:bg-rose-950/50 px-4 py-3 text-rose-900 dark:text-white focus:border-primary focus:ring-primary transition-colors">
+                </div>
+                <div>
+                  <label for="subject" class="block text-sm font-medium text-rose-900 dark:text-rose-100">Subject</label>
+                  <input type="text" id="subject" class="mt-1 block w-full rounded-xl border-gray-300 dark:border-rose-700 bg-rose-50/50 dark:bg-rose-950/50 px-4 py-3 text-rose-900 dark:text-white focus:border-primary focus:ring-primary transition-colors">
+                </div>
+                <div>
+                  <label for="message" class="block text-sm font-medium text-rose-900 dark:text-rose-100">Message</label>
+                  <textarea id="message" rows="4" required class="mt-1 block w-full rounded-xl border-gray-300 dark:border-rose-700 bg-rose-50/50 dark:bg-rose-950/50 px-4 py-3 text-rose-900 dark:text-white focus:border-primary focus:ring-primary transition-colors resize-none"></textarea>
+                </div>
+                <div>
+                  <button type="submit" class="w-full flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-primary hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors">
+                    Send Message
+                  </button>
+                </div>
+                <p id="contact-message" class="text-sm hidden text-center font-medium mt-4"></p>
+              </form>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-rose-dark dark:bg-rose-950 py-20 border-t border-rose-800/50 reveal">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 class="text-3xl font-display font-bold text-white mb-4" data-i18n="newsletter-title">Stay Cool with Amul</h2>
+          <p class="text-lg text-rose-100 mb-8" data-i18n="newsletter-desc">Subscribe to our newsletter for the latest refreshing updates, exclusive offers, and more.</p>
+          <form class="sm:flex flex-col items-center justify-center max-w-xl mx-auto" id="newsletter-form">
+            <div class="w-full flex sm:flex-row flex-col">
+              <label class="sr-only" for="email-address">Email address</label>
+              <input autocomplete="email" class="w-full px-5 py-4 border border-rose-300/50 dark:border-rose-700 placeholder-rose-300 focus:ring-2 focus:ring-offset-2 focus:ring-offset-rose-dark focus:ring-white focus:border-white sm:max-w-xs rounded-full sm:rounded-r-none sm:rounded-l-full bg-rose-800/50 dark:bg-rose-900/50 text-white shadow-inner" id="email-address" name="email" placeholder="Enter your email" data-i18n="newsletter-placeholder" required="" type="email"/>
+              <div class="mt-3 rounded-md shadow sm:mt-0 sm:flex-shrink-0 w-full sm:w-auto">
+                <button class="w-full flex items-center justify-center px-5 py-4 border border-transparent text-base font-medium rounded-full sm:rounded-l-none sm:rounded-r-full text-rose-dark bg-white hover:bg-rose-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-rose-dark focus:ring-white transition-colors" type="submit" data-i18n="newsletter-btn">
+                    Subscribe
+                </button>
+              </div>
+            </div>
+            <p id="newsletter-message" class="text-white mt-4 text-sm hidden"></p>
+          </form>
+        </div>
+      </section>
+      
+      <footer class="bg-rose-950 pt-20 text-white pb-10 text-center md:text-left">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 border-b border-rose-900/50 pb-16">
+            <div class="col-span-1 md:col-span-1 flex flex-col items-center md:items-start">
+              <span class="font-display font-bold text-4xl text-white tracking-tight">Amul <span class="text-primary">Kool</span></span>
+              <p class="mt-4 text-rose-200/70 text-sm max-w-xs leading-relaxed">The Taste of India, refreshing generations with authentic flavor and nourishing goodness.</p>
+            </div>
+            <div>
+              <h4 class="text-rose-400 uppercase tracking-widest text-xs font-bold mb-6">Products</h4>
+              <ul class="space-y-3 text-sm text-rose-200/70 font-medium">
+                <li><a class="hover:text-white transition-colors duration-200" href="#">Amul Kool Rose</a></li>
+                <li><a class="hover:text-white transition-colors duration-200" href="#">Amul Kool Kesar</a></li>
+                <li><a class="hover:text-white transition-colors duration-200" href="#">Amul Kool Badam</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-rose-400 uppercase tracking-widest text-xs font-bold mb-6">Company</h4>
+              <ul class="space-y-3 text-sm text-rose-200/70 font-medium">
+                <li><a class="hover:text-white transition-colors duration-200" href="#">About Us</a></li>
+                <li><a class="hover:text-white transition-colors duration-200" href="#">Careers</a></li>
+                <li><a class="hover:text-white transition-colors duration-200" href="#contact">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-rose-400 uppercase tracking-widest text-xs font-bold mb-6">Follow Us</h4>
+              <div class="flex justify-center md:justify-start space-x-4">
+                <a class="p-2 bg-rose-900/50 rounded-full text-rose-200 hover:text-white hover:bg-primary transition-all duration-300" href="#">
+                  <span class="sr-only">Facebook</span>
+                  <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path></svg>
+                </a>
+                <a class="p-2 bg-rose-900/50 rounded-full text-rose-200 hover:text-white hover:bg-primary transition-all duration-300" href="#">
+                  <span class="sr-only">Instagram</span>
+                  <svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" fill-rule="evenodd"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <p class="text-rose-200/50 text-sm text-center font-medium">
+              © 2024 Amul. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
